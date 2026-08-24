@@ -254,10 +254,11 @@
       <p class="latin center" style="font-size:0.9rem; font-weight:600; color:#DCEEFF; margin-bottom:0.7rem;">מוכנים לדעת יותר?</p>
       <h2 class="headline center" style="font-size:clamp(1.5rem,3.5vw,2rem);">להשארת פרטים לשיחת ייעוץ אישית וללא עלות, מלאו את הטופס ולחצו על הכפתור:</h2>
 
-      <form id="lead-form" class="form-wrap">
+      <form id="lead-form" class="form-wrap" action="https://script.google.com/macros/s/AKfycbyv8vVZrvdt-DiB1kaUxPsTFbXO7lYUYWNPCl86oazvcn7hx2Q7h5FTFpsmBtQzeXYoKA/exec" method="POST" target="hidden_lead_iframe">
         <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" required /></div>
         <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" required /></div>
         <div class="field"><label for="f-email">אימייל (לא חובה)</label><input id="f-email" name="email" type="email" /></div>
+        <input type="hidden" id="f-page" name="page" />
         <button type="submit" class="cta-btn full">השאירו פרטים לשיחת ייעוץ חינם</button>
       </form>
 
@@ -265,6 +266,7 @@
         <p class="name" id="thanks-name">תודה!</p>
         <p style="opacity:0.9;">קיבלנו את הפרטים. ניצור קשר בקרוב לתיאום שיחת הייעוץ.</p>
       </div>
+      <iframe name="hidden_lead_iframe" style="display:none;"></iframe>
 
       <p class="disclaimer">שיחת הייעוץ נועדה להבין אם הבדיקה מתאימה לכם — לא כל אחד מתאים באופן אוטומטי, ויש בדיקת התאמה רפואית לפני קביעת תור בפועל. אנחנו שומרים על מספר מוגבל של שיחות בכל שבוע, כדי לתת לכל שיחה את תשומת הלב שהיא דורשת.</p>
     </div>
@@ -285,8 +287,9 @@
     var form = document.getElementById('lead-form');
     var thanks = document.getElementById('lead-thanks');
     var thanksName = document.getElementById('thanks-name');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    var pageField = document.getElementById('f-page');
+    form.addEventListener('submit', function () {
+      if (pageField) pageField.value = location.href;
       var name = document.getElementById('f-name').value.trim();
       var first = name.split(' ')[0] || '';
       thanksName.textContent = first ? ('תודה, ' + first + '!') : 'תודה!';
