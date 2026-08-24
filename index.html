@@ -288,9 +288,25 @@
     var thanks = document.getElementById('lead-thanks');
     var thanksName = document.getElementById('thanks-name');
     var pageField = document.getElementById('f-page');
+    var SUPABASE_URL = 'https://zkcqsaqlngvxwrjuxyit.supabase.co/rest/v1/leads';
+    var SUPABASE_KEY = 'sb_publishable_sbuHpZorVojRXPibA1_XTw_cFb6MBvt';
     form.addEventListener('submit', function () {
       if (pageField) pageField.value = location.href;
       var name = document.getElementById('f-name').value.trim();
+      var phone = document.getElementById('f-phone').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+
+      fetch(SUPABASE_URL, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ name: name, phone: phone, email: email, page: location.href })
+      }).catch(function () {});
+
       var first = name.split(' ')[0] || '';
       thanksName.textContent = first ? ('תודה, ' + first + '!') : 'תודה!';
       form.classList.add('hidden');
