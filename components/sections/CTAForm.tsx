@@ -6,16 +6,31 @@ import { Chapter, Container, FocusCircle, Reveal } from "../ui";
 
 // הערה: אין עדיין חיבור ל-CRM/Backend אמיתי (נושא פתוח לפי CLAUDE.md סעיף 22, 43).
 // הטופס מדמה שליחה מוצלחת בצד הלקוח בלבד — יש לחבר endpoint אמיתי לפני השקה.
+
+const PHONE_RE = /^0\d{1,2}-?\d{7}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function CTAForm() {
   const c = copy.ctaForm;
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<{ name?: string; phone?: string; email?: string }>({});
+
+  function validate() {
+    const next: typeof errors = {};
+    if (!name.trim()) next.name = "נא למלא שם מלא";
+    if (!phone.trim()) next.phone = "נא למלא מספר טלפון";
+    else if (!PHONE_RE.test(phone.trim())) next.phone = "מספר הטלפון לא תקין";
+    if (email.trim() && !EMAIL_RE.test(email.trim())) next.email = "כתובת האימייל לא תקינה";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    if (!validate()) return;
     setSubmitted(true);
   }
 
@@ -36,14 +51,14 @@ export default function CTAForm() {
 
         <Reveal>
           {submitted ? (
-            <div className="mt-8 rounded-2xl bg-white/10 border border-white/20 p-8 text-center">
+            <div role="status" className="mt-8 rounded-2xl bg-white/10 border border-white/20 p-8 text-center">
               <p className="text-xl font-semibold mb-2">תודה, {name.split(" ")[0] || ""}!</p>
               <p className="opacity-90 leading-relaxed">
                 קיבלנו את הפרטים. ניצור קשר בקרוב לתיאום שיחת הייעוץ.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm mb-1.5 opacity-90">
                   שם מלא
@@ -53,9 +68,16 @@ export default function CTAForm() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                   className="w-full rounded-xl px-4 py-3.5 text-base text-text bg-white/95 outline-none focus:ring-2 focus:ring-cta"
                   dir="rtl"
                 />
+                {errors.name && (
+                  <p id="name-error" role="alert" className="mt-1.5 text-sm font-semibold" style={{ color: "#FFB4A0" }}>
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm mb-1.5 opacity-90">
@@ -67,10 +89,17 @@ export default function CTAForm() {
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  aria-invalid={errors.phone ? true : undefined}
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
                   className="w-full rounded-xl px-4 py-3.5 text-base text-text bg-white/95 outline-none focus:ring-2 focus:ring-cta"
                   dir="ltr"
                   style={{ textAlign: "right" }}
                 />
+                {errors.phone && (
+                  <p id="phone-error" role="alert" className="mt-1.5 text-sm font-semibold" style={{ color: "#FFB4A0" }}>
+                    {errors.phone}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm mb-1.5 opacity-90">
@@ -81,16 +110,24 @@ export default function CTAForm() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                   className="w-full rounded-xl px-4 py-3.5 text-base text-text bg-white/95 outline-none focus:ring-2 focus:ring-cta"
                   dir="ltr"
                   style={{ textAlign: "right" }}
                 />
+                {errors.email && (
+                  <p id="email-error" role="alert" className="mt-1.5 text-sm font-semibold" style={{ color: "#FFB4A0" }}>
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl font-bold text-white text-lg px-8 py-4 mt-2"
+                className="w-full rounded-xl font-bold text-lg px-8 py-4 mt-2"
                 style={{
                   background: "var(--cta)",
+                  color: "var(--text)",
                   boxShadow: "0 8px 24px rgba(244,142,114,0.35)",
                 }}
               >

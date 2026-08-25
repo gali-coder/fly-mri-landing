@@ -52,22 +52,22 @@ export default function Knowledge() {
           </h2>
           <dl className="space-y-5">
             <div>
-              <Kicker tone="onDark">WHAT IT IS</Kicker>
+              <Kicker tone="onDark" as="dt">WHAT IT IS</Kicker>
               <dd className="text-white">{c.techProof.whatItIs}</dd>
             </div>
             <div>
-              <Kicker tone="onDark">TECHNOLOGY</Kicker>
+              <Kicker tone="onDark" as="dt">TECHNOLOGY</Kicker>
               <dd className="text-white">{c.techProof.technology}</dd>
             </div>
             <div>
-              <Kicker tone="onDark">WHAT IT CAN SHOW</Kicker>
+              <Kicker tone="onDark" as="dt">WHAT IT CAN SHOW</Kicker>
               <dd className="text-white">{c.techProof.whatItCanShow}</dd>
             </div>
             <div className="pt-4 border-t" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
-              <p className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color: "rgba(255,255,255,0.5)" }}>
+              <dt className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>
                 WHAT TO KNOW
-              </p>
-              <dd className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.68)" }}>
+              </dt>
+              <dd className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
                 {c.techProof.whatToKnow}
               </dd>
             </div>
@@ -79,7 +79,7 @@ export default function Knowledge() {
       <Chapter bg="bgAlt" curveTop className="py-16 sm:py-20">
         <Container className="max-w-3xl">
           <Reveal>
-            <p className="text-center font-heading font-semibold text-xl text-text mb-10">מסע הבדיקה, שלב אחר שלב</p>
+            <h2 className="text-center font-heading font-semibold text-xl text-text mb-10">מסע הבדיקה, שלב אחר שלב</h2>
           </Reveal>
           <Reveal>
             <div className="relative grid sm:grid-cols-3 gap-8 sm:gap-4">

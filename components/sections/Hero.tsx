@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="relative overflow-hidden min-h-[560px] sm:min-h-[680px] flex items-end sm:items-center">
       <Image
         src="/images/hero-life.png"
-        alt="גבר רגוע מביט אל הים, רקע הירו"
+        alt=""
         fill
         priority
         sizes="100vw"
@@ -63,7 +63,7 @@ export default function Hero() {
             <ScanLine className="mb-6 sm:mb-8" stroke="#8FC1FF" opacity={0.6} />
           </motion.div>
 
-          <motion.p variants={fadeUp} className="text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+          <motion.p variants={fadeUp} className="text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
             {c.insightLine}
           </motion.p>
 

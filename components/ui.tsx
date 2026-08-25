@@ -14,17 +14,29 @@ export const staggerContainer = {
   visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-export function Reveal({ children, className }: { children: ReactNode; className?: string }) {
+export function Reveal({
+  children,
+  className,
+  style,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  as?: "div" | "li";
+}) {
+  const MotionTag = as === "li" ? motion.li : motion.div;
   return (
-    <motion.div
+    <MotionTag
       className={className}
+      style={style}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.25 }}
       variants={fadeUp}
     >
       {children}
-    </motion.div>
+    </MotionTag>
   );
 }
 
@@ -32,12 +44,23 @@ export function Container({ children, className = "" }: { children: ReactNode; c
   return <div className={`mx-auto w-full max-w-3xl px-6 ${className}`}>{children}</div>;
 }
 
-export function Kicker({ children, tone = "accent" }: { children: ReactNode; tone?: "accent" | "muted" | "onDark" }) {
-  const color = tone === "accent" ? "var(--accent)" : tone === "onDark" ? "#A9CDF5" : "var(--text-secondary)";
+export function Kicker({
+  children,
+  tone = "accent",
+  as = "p",
+}: {
+  children: ReactNode;
+  tone?: "accent" | "muted" | "onDark";
+  as?: "p" | "dt";
+}) {
+  // "accent" uses a darkened blue (not the raw --accent) so small bold labels
+  // keep 4.5:1 contrast against our light backgrounds (WCAG 2.1 AA).
+  const color = tone === "accent" ? "#1857B8" : tone === "onDark" ? "#A9CDF5" : "var(--text-secondary)";
+  const Tag = as;
   return (
-    <p className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color }}>
+    <Tag className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color }}>
       {children}
-    </p>
+    </Tag>
   );
 }
 
@@ -269,7 +292,7 @@ export function ImagePlaceholder({
           border: `1px solid ${dark ? "rgba(255,255,255,0.2)" : "rgba(17,43,60,0.08)"}`,
         }}
       >
-        <p className="font-latin text-[0.65rem] font-semibold tracking-[0.1em] mb-0.5" style={{ color: dark ? "#DCEEFF" : "var(--accent)" }}>
+        <p className="font-latin text-[0.65rem] font-semibold tracking-[0.1em] mb-0.5" style={{ color: dark ? "#DCEEFF" : "#1857B8" }}>
           {style.label} · תמונה בהמשך
         </p>
         <p className="text-xs leading-snug" style={{ color: dark ? "rgba(255,255,255,0.85)" : "var(--text-secondary)" }}>
@@ -318,7 +341,7 @@ export function CTAButton({
       }`}
       style={
         variant === "solid"
-          ? { background: "var(--cta)", color: "#fff", boxShadow: "0 8px 22px rgba(244,142,114,0.35)" }
+          ? { background: "var(--cta)", color: "var(--text)", boxShadow: "0 8px 22px rgba(244,142,114,0.35)" }
           : { border: "1.5px solid rgba(255,255,255,0.4)", color: "#fff", background: "transparent" }
       }
     >

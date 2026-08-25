@@ -48,6 +48,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSansHebrew.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text font-body">
+        <a href="#main-content" className="skip-link">
+          דלגו לתוכן הראשי
+        </a>
         {children}
       </body>
     </html>

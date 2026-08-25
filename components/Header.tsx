@@ -12,8 +12,8 @@ export default function Header() {
         <div className="hidden sm:block">
           <a
             href="#consult"
-            className="text-sm font-semibold text-white rounded-full px-5 py-2.5"
-            style={{ background: "var(--cta)" }}
+            className="text-sm font-semibold rounded-full px-5 py-2.5"
+            style={{ background: "var(--cta)", color: "var(--text)" }}
           >
             {copy.hero.ctaText}
           </a>

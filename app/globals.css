@@ -4,7 +4,7 @@
   --bg: #FAF9F6;
   --bg-alt: #E9DFD2;
   --text: #112B3C;
-  --text-secondary: #5A6B78;
+  --text-secondary: #4E5F6B;
   --accent: #2D7FF9;
   --accent-light: #DCEEFF;
   --cta: #F48E72;
@@ -38,4 +38,121 @@ body {
 ::selection {
   background: var(--accent-light);
   color: var(--text);
+}
+
+/* ── Accessibility: visible keyboard focus everywhere ─────────────────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link — hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  right: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: var(--white);
+  color: var(--text);
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(17, 43, 60, 0.25);
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Legal document typography ─────────────────────────────────────────── */
+.legal-doc {
+  line-height: 1.8;
+}
+.legal-doc h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  color: var(--text);
+  margin: 0 0 1.5rem;
+}
+.legal-doc h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--text);
+  margin: 2.5rem 0 1rem;
+}
+.legal-doc h3 {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 1.5rem 0 0.5rem;
+}
+.legal-doc p {
+  color: var(--text);
+  margin: 0 0 1rem;
+}
+.legal-doc strong {
+  font-weight: 700;
+  color: var(--text);
+}
+.legal-doc a {
+  /* darkened accent blue for 4.5:1 contrast on light backgrounds (WCAG AA) */
+  color: #1857B8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal-doc ul, .legal-doc ol {
+  margin: 0 0 1rem;
+  padding-inline-start: 1.5rem;
+}
+.legal-doc li {
+  margin-bottom: 0.4rem;
+}
+.legal-doc hr {
+  border: none;
+  border-top: 1px solid rgba(17, 43, 60, 0.12);
+  margin: 2rem 0;
+}
+.legal-doc blockquote {
+  border-inline-start: 3px solid var(--accent-light);
+  padding-inline-start: 1rem;
+  color: var(--text-secondary);
+  margin: 1rem 0;
+}
+.legal-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.92rem;
+}
+.legal-doc th, .legal-doc td {
+  border: 1px solid rgba(17, 43, 60, 0.12);
+  padding: 0.6rem 0.8rem;
+  text-align: right;
+}
+.legal-doc th {
+  background: var(--bg-alt);
+  font-weight: 700;
+}
+.legal-doc code {
+  background: var(--bg-alt);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.9em;
 }

@@ -22,11 +22,14 @@ export default function Care() {
 
           <ul className="space-y-5 mb-12">
             {c.confidencePoints.map((p) => (
-              <Reveal key={p.label}>
-                <li className="rounded-2xl px-5 py-4" style={{ background: "rgba(255,255,255,0.65)", backdropFilter: "blur(6px)" }}>
-                  <p className="font-heading font-semibold text-text mb-1">{p.label}</p>
-                  <p className="text-sm text-text-secondary leading-relaxed">{p.text}</p>
-                </li>
+              <Reveal
+                key={p.label}
+                as="li"
+                className="block rounded-2xl px-5 py-4"
+                style={{ background: "rgba(255,255,255,0.65)", backdropFilter: "blur(6px)" }}
+              >
+                <p className="font-heading font-semibold text-text mb-1">{p.label}</p>
+                <p className="text-sm text-text-secondary leading-relaxed">{p.text}</p>
               </Reveal>
             ))}
           </ul>

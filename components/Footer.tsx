@@ -1,4 +1,12 @@
+import Link from "next/link";
 import { Logo } from "./ui";
+
+const legalLinks = [
+  { href: "/terms", label: "תקנון ותנאי שימוש" },
+  { href: "/privacy", label: "מדיניות פרטיות" },
+  { href: "/cookies", label: "מדיניות עוגיות" },
+  { href: "/accessibility", label: "הצהרת נגישות" },
+];
 
 export default function Footer() {
   return (
@@ -11,8 +19,21 @@ export default function Footer() {
           הקליניות הן באחריות הספק הרפואי ואנשי המקצוע המוסמכים מטעמו בלבד. המידע באתר זה אינו מהווה
           ייעוץ רפואי ואינו מחליף התייעצות עם רופא.
         </p>
-        <p className="text-xs text-text-secondary/70 mt-4">
-          © {new Date().getFullYear()} Fly MRI
+
+        <nav aria-label="קישורים משפטיים" className="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-6">
+          {legalLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-xs font-semibold text-text-secondary hover:text-accent underline underline-offset-2"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        <p className="text-xs text-text-secondary mt-6">
+          פליי אם אר איי בע&quot;מ · ח.פ. 515702637 · © {new Date().getFullYear()} Fly MRI
         </p>
       </div>
     </footer>
