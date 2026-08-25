@@ -14,10 +14,30 @@ const manrope = Manrope({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const siteUrl = "https://fly-mri-landing.vercel.app";
+const ogTitle = "FlyMRI | Know more. Live better.";
+const ogDescription =
+  "A clearer picture of your health, with a simple, carefully coordinated MRI experience abroad.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Fly MRI — בדיקת MRI גוף מלא לבריאות מונעת",
   description:
     "הדרך הברורה לדעת יותר על הבריאות שלכם. בדיקת MRI גוף מלא לבריאות מונעת, בליווי מתואם מקצה לקצה אצל ספק רפואי נבחר בחו״ל. Know more. Live better.",
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: ogTitle,
+    description: ogDescription,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    locale: "he_IL",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: ogTitle,
+    description: ogDescription,
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
