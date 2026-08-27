@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { Manrope, Noto_Sans_Hebrew } from "next/font/google";
+import Script from "next/script";
 import MotionProvider from "@/components/MotionProvider";
+import Analytics from "@/components/Analytics";
+import ConsentBanner from "@/components/ConsentBanner";
 import "./globals.css";
+
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const hasTags = Boolean(GTM_ID || META_PIXEL_ID);
 
 const notoSansHebrew = Noto_Sans_Hebrew({
   variable: "--font-hebrew",
@@ -49,10 +56,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSansHebrew.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text font-body">
+        {hasTags && (
+          <Script id="consent-mode-default" strategy="beforeInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});try{var c=JSON.parse(localStorage.getItem('flymri_consent')||'null');if(c&&c.marketing===true){gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});}}catch(e){}gtag('js',new Date());`}
+          </Script>
+        )}
         <a href="#main-content" className="skip-link">
           דלגו לתוכן הראשי
         </a>
         <MotionProvider>{children}</MotionProvider>
+        <Analytics />
+        <ConsentBanner />
       </body>
     </html>
   );

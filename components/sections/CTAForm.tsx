@@ -3,24 +3,13 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { copy } from "@/lib/copy";
 import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
+import { getAttribution, trackLead } from "@/lib/tracking";
 import { Chapter, Container, FocusCircle, Reveal } from "../ui";
 
 const PHONE_RE = /^0\d{1,2}-?\d{7}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type FieldErrors = { name?: string; phone?: string; email?: string };
-
-function readSource() {
-  if (typeof window === "undefined") return { page: "", referrer: "", utmSource: "", utmMedium: "", utmCampaign: "" };
-  const q = new URLSearchParams(window.location.search);
-  return {
-    page: window.location.href,
-    referrer: document.referrer,
-    utmSource: q.get("utm_source") ?? "",
-    utmMedium: q.get("utm_medium") ?? "",
-    utmCampaign: q.get("utm_campaign") ?? "",
-  };
-}
 
 export default function CTAForm() {
   const c = copy.ctaForm;
@@ -73,7 +62,7 @@ export default function CTAForm() {
           email: email.trim(),
           marketingConsent,
           company, // honeypot
-          ...readSource(),
+          ...getAttribution(),
         }),
       });
       const body = (await res.json().catch(() => ({}))) as {
@@ -83,6 +72,7 @@ export default function CTAForm() {
       };
 
       if (res.ok && body.ok) {
+        trackLead(); // אירוע המרה — רק אחרי שהשרת אישר שהליד נשמר
         setSubmitted(true);
         return;
       }

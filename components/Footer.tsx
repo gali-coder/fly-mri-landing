@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CookieSettingsLink from "./CookieSettingsLink";
 import { Logo } from "./ui";
 
 const legalLinks = [
@@ -30,6 +31,7 @@ export default function Footer() {
               {l.label}
             </Link>
           ))}
+          <CookieSettingsLink className="text-xs font-semibold text-text-secondary hover:text-accent underline underline-offset-2" />
         </nav>
 
         <p className="text-xs text-text-secondary mt-6">
