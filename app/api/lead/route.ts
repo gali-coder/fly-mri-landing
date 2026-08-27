@@ -106,7 +106,8 @@ export async function POST(request: NextRequest) {
   if (!name) fieldErrors.name = "נא למלא שם מלא";
   if (!phone) fieldErrors.phone = "נא למלא מספר טלפון";
   else if (!PHONE_RE.test(phone)) fieldErrors.phone = "מספר הטלפון לא תקין";
-  if (email && !EMAIL_RE.test(email)) fieldErrors.email = "כתובת האימייל לא תקינה";
+  if (!email) fieldErrors.email = "נא למלא כתובת אימייל";
+  else if (!EMAIL_RE.test(email)) fieldErrors.email = "כתובת האימייל לא תקינה";
   if (Object.keys(fieldErrors).length > 0) {
     return Response.json({ ok: false, error: "validation", fieldErrors }, { status: 400 });
   }

@@ -44,7 +44,8 @@ export default function CTAForm() {
     if (!name.trim()) next.name = "נא למלא שם מלא";
     if (!phone.trim()) next.phone = "נא למלא מספר טלפון";
     else if (!PHONE_RE.test(phone.trim())) next.phone = "מספר הטלפון לא תקין";
-    if (email.trim() && !EMAIL_RE.test(email.trim())) next.email = "כתובת האימייל לא תקינה";
+    if (!email.trim()) next.email = "נא למלא כתובת אימייל";
+    else if (!EMAIL_RE.test(email.trim())) next.email = "כתובת האימייל לא תקינה";
     return next;
   }
 
@@ -204,11 +205,12 @@ export default function CTAForm() {
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm mb-1.5 opacity-90">
-                  אימייל <span className="opacity-70">(לא חובה)</span>
+                  אימייל <span className="opacity-70">(חובה)</span>
                 </label>
                 <input
                   id="email"
                   type="email"
+                  required
                   autoComplete="email"
                   inputMode="email"
                   value={email}
