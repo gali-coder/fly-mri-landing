@@ -18,19 +18,25 @@ export default function CTAForm() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<{ name?: string; phone?: string; email?: string }>({});
 
-  function validate() {
+  function computeErrors() {
     const next: typeof errors = {};
     if (!name.trim()) next.name = "נא למלא שם מלא";
     if (!phone.trim()) next.phone = "נא למלא מספר טלפון";
     else if (!PHONE_RE.test(phone.trim())) next.phone = "מספר הטלפון לא תקין";
     if (email.trim() && !EMAIL_RE.test(email.trim())) next.email = "כתובת האימייל לא תקינה";
-    setErrors(next);
-    return Object.keys(next).length === 0;
+    return next;
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!validate()) return;
+    const next = computeErrors();
+    setErrors(next);
+    const firstInvalid = (["name", "phone", "email"] as const).find((k) => next[k]);
+    if (firstInvalid) {
+      // Move keyboard focus to the first field with an error so the message is announced.
+      document.getElementById(firstInvalid)?.focus();
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -61,11 +67,12 @@ export default function CTAForm() {
             <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm mb-1.5 opacity-90">
-                  שם מלא
+                  שם מלא <span className="opacity-70">(חובה)</span>
                 </label>
                 <input
                   id="name"
                   required
+                  autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   aria-invalid={errors.name ? true : undefined}
@@ -81,12 +88,14 @@ export default function CTAForm() {
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm mb-1.5 opacity-90">
-                  טלפון
+                  טלפון <span className="opacity-70">(חובה)</span>
                 </label>
                 <input
                   id="phone"
                   type="tel"
                   required
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   aria-invalid={errors.phone ? true : undefined}
@@ -103,11 +112,13 @@ export default function CTAForm() {
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm mb-1.5 opacity-90">
-                  אימייל (לא חובה)
+                  אימייל <span className="opacity-70">(לא חובה)</span>
                 </label>
                 <input
                   id="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   aria-invalid={errors.email ? true : undefined}

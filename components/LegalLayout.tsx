@@ -8,7 +8,7 @@ export default function LegalLayout({ markdown }: { markdown: string }) {
   return (
     <>
       <Header />
-      <main id="main-content" className="bg-bg py-16 sm:py-20">
+      <main id="main-content" tabIndex={-1} className="bg-bg py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-6">
           <Link
             href="/"
@@ -18,7 +18,17 @@ export default function LegalLayout({ markdown }: { markdown: string }) {
             → חזרה לדף הבית
           </Link>
           <article className="legal-doc">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                // GFM tables only ever produce column headers — mark them so
+                // screen readers announce the header for each data cell.
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                th: ({ node, ...props }) => <th scope="col" {...props} />,
+              }}
+            >
+              {markdown}
+            </ReactMarkdown>
           </article>
         </div>
       </main>

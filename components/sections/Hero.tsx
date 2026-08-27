@@ -43,8 +43,10 @@ export default function Hero() {
           animate="visible"
           variants={staggerContainer}
           className="sm:ml-auto max-w-lg text-right"
+          /* scrim-independent legibility guarantee for text over the photo (WCAG 1.4.3) */
+          style={{ textShadow: "0 1px 10px rgba(17,43,60,0.55)" }}
         >
-          <motion.p variants={fadeUp} className="font-latin text-sm sm:text-base font-semibold mb-4 sm:mb-6" style={{ color: "#8FC1FF" }}>
+          <motion.p variants={fadeUp} lang="en" className="font-latin text-sm sm:text-base font-semibold mb-4 sm:mb-6" style={{ color: "#8FC1FF" }}>
             {c.eyebrow}
           </motion.p>
 

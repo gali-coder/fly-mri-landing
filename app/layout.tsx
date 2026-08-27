@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Noto_Sans_Hebrew } from "next/font/google";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const notoSansHebrew = Noto_Sans_Hebrew({
@@ -14,7 +15,7 @@ const manrope = Manrope({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl = "https://fly-mri-landing.vercel.app";
+const siteUrl = "https://flymri.com";
 const ogTitle = "FlyMRI | Know more. Live better.";
 const ogDescription =
   "A clearer picture of your health, with a simple, carefully coordinated MRI experience abroad.";
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="skip-link">
           דלגו לתוכן הראשי
         </a>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

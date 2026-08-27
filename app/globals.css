@@ -79,6 +79,25 @@ textarea:focus-visible,
   }
 }
 
+/* No-JavaScript fallback — Framer Motion server-renders animated blocks with
+   inline opacity:0 / translateY and only reveals them after hydration. If
+   scripting is unavailable, force that content visible so nothing is lost. */
+@media (scripting: none) {
+  [style*="opacity:0"] { opacity: 1 !important; }
+  [style*="translateY(20px)"] { transform: none !important; }
+}
+
+/* Keep in-page anchor targets clear of the sticky header when jumped to
+   (skip link, "#consult" CTA). */
+:target,
+#main-content {
+  scroll-margin-top: 5rem;
+}
+/* The skip-link destination is a non-interactive programmatic focus target. */
+#main-content:focus {
+  outline: none;
+}
+
 /* ── Legal document typography ─────────────────────────────────────────── */
 .legal-doc {
   line-height: 1.8;

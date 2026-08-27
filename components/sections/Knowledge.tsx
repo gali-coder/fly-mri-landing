@@ -13,7 +13,7 @@ export default function Knowledge() {
         <Container className="max-w-lg relative">
           <div className="relative">
             <ChapterMarker />
-            <Kicker>WHAT YOU ACTUALLY GET</Kicker>
+            <Kicker><span lang="en">WHAT YOU ACTUALLY GET</span></Kicker>
             <h2 className="font-heading font-bold text-2xl sm:text-3xl text-text mb-3 leading-snug">
               מה זה נותן לכם, בפועל
             </h2>
@@ -52,19 +52,19 @@ export default function Knowledge() {
           </h2>
           <dl className="space-y-5">
             <div>
-              <Kicker tone="onDark" as="dt">WHAT IT IS</Kicker>
+              <Kicker tone="onDark" as="dt"><span lang="en">WHAT IT IS</span></Kicker>
               <dd className="text-white">{c.techProof.whatItIs}</dd>
             </div>
             <div>
-              <Kicker tone="onDark" as="dt">TECHNOLOGY</Kicker>
+              <Kicker tone="onDark" as="dt"><span lang="en">TECHNOLOGY</span></Kicker>
               <dd className="text-white">{c.techProof.technology}</dd>
             </div>
             <div>
-              <Kicker tone="onDark" as="dt">WHAT IT CAN SHOW</Kicker>
+              <Kicker tone="onDark" as="dt"><span lang="en">WHAT IT CAN SHOW</span></Kicker>
               <dd className="text-white">{c.techProof.whatItCanShow}</dd>
             </div>
             <div className="pt-4 border-t" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
-              <dt className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <dt lang="en" className="font-latin text-[0.7rem] font-semibold tracking-[0.08em] mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>
                 WHAT TO KNOW
               </dt>
               <dd className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
