@@ -46,6 +46,12 @@ export const metadata: Metadata = {
     description: ogDescription,
     images: ["/og-image.jpg"],
   },
+  verification: {
+    other: {
+      // אימות בעלות על הדומיין ל-Meta Business (Meta Pixel / דומיינים)
+      "facebook-domain-verification": "d6usg312nwktk2449vq36zzbobb9ms",
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
