@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   verification: {
     other: {
       // אימות בעלות על הדומיין ל-Meta Business (Meta Pixel / דומיינים)
-      "facebook-domain-verification": "d6usg312nwktk2449vq36zzbobb9ms",
+      "facebook-domain-verification": "ryhv8zjkcehfpdfvoszuck1eigsifk",
     },
   },
 };
