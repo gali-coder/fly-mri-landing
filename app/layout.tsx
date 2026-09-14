@@ -32,6 +32,14 @@ export const metadata: Metadata = {
   title: "Fly MRI — בדיקת MRI גוף מלא לבריאות מונעת",
   description:
     "הדרך הברורה לדעת יותר על הבריאות שלכם. בדיקת MRI גוף מלא לבריאות מונעת, בליווי מתואם מקצה לקצה אצל ספק רפואי נבחר בחו״ל. Know more. Live better.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -49,7 +57,11 @@ export const metadata: Metadata = {
   verification: {
     other: {
       // אימות בעלות על הדומיין ל-Meta Business (Meta Pixel / דומיינים)
-      "facebook-domain-verification": "ryhv8zjkcehfpdfvoszuck1eigsifk",
+      // מספר קודים כי יש כמה Business Manager שצריכים לאמת את הדומיין בנפרד
+      "facebook-domain-verification": [
+        "ryhv8zjkcehfpdfvoszuck1eigsifk",
+        "tzhhqw1otu2zu0d1opesv60s0ym010", // BM: Ymri (9370010225384174)
+      ],
     },
   },
 };
