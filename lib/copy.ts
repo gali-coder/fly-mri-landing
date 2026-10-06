@@ -1,19 +1,23 @@
 // מקור: messages/20260823-212659/copy.json — בהתאם ל-FLY_MRI_Master_Brand_Book_HE.pptx (23.08.2026).
 // אין לשכתב באופן חופשי טקסטים משפטיים/הבהרות רפואיות — הם עברו בדיקת ציות מול המשתמש.
+//
+// "*" added after "הגוף כולו" / "MRI גוף מלא" (2026-10-06, per Gali, same decision
+// applied on the website/ repo) — wording itself unchanged; footnoted by the new
+// coverage-scope sentence appended to components/Footer.tsx's disclaimer paragraph.
 
 export const copy = {
   hero: {
     eyebrow: "Know more. Live better.",
     headline: "הדרך הברורה לדעת יותר על הבריאות שלכם",
     subheadline:
-      "בדיקת MRI גוף מלא לבריאות מונעת, בליווי מתואם מקצה לקצה אצל ספק רפואי נבחר בחו״ל.",
+      "בדיקת MRI גוף מלא* לבריאות מונעת, בליווי מתואם מקצה לקצה אצל ספק רפואי נבחר בחו״ל.",
     insightLine:
       "אתם משקיעים כמעט בכל דבר חשוב בחיים שלכם — הגיע הזמן שגם הבריאות תקבל את אותה תשומת לב.",
     ctaText: "השאירו פרטים לשיחת ייעוץ חינם",
   },
   knowledge: {
     pillars: [
-      { name: "Access", nameHe: "גישה", description: "גישה לספק רפואי נבחר בחו״ל, לבדיקה שכמעט ואינה קיימת כאפשרות זמינה בישראל" },
+      { name: "Access", nameHe: "גישה", description: "גישה לספק רפואי נבחר בחו״ל, לבדיקת סקר רחבה שאינה נפוצה כיוזמה אישית בישראל" },
       { name: "Quality", nameHe: "איכות", description: "הספק עבר תהליך בחירה קפדני — קריטריונים קליניים, תפעוליים ומסחריים, לא רק מחיר וזמינות" },
       { name: "Clarity", nameHe: "בהירות", description: "לפני שמתקדמים, מקבלים הסבר מדויק למה לצפות — מה הבדיקה כן מראה, ומה חשוב לדעת" },
       { name: "Coordination", nameHe: "תיאום", description: "מהשיחה הראשונה ועד קבלת הדוח — כל שלב מתואם עבורכם, כולל טיסה והגעה" },
@@ -21,8 +25,8 @@ export const copy = {
       { name: "Experience", nameHe: "חוויה", description: "תהליך שמרגיש מסודר ואנושי, בלי הפתעות — לא מרפאה, לא נמל תעופה" },
     ],
     techProof: {
-      headline: "בדיקת MRI גוף מלא — מה זה, מה היא מראה, ומה חשוב לדעת",
-      whatItIs: "הדמיה של הגוף כולו במכשיר MRI, למטרות בריאות מונעת",
+      headline: "בדיקת MRI גוף מלא* — מה זה, מה היא מראה, ומה חשוב לדעת",
+      whatItIs: "הדמיה של הגוף כולו* במכשיר MRI, למטרות בריאות מונעת",
       technology: "ללא חומר ניגוד ובלי קרינה מייננת",
       whatItCanShow: "תמונה רחבה של מבנים ואיברים בגוף",
       whatToKnow: "הבדיקה אינה מחליפה ייעוץ רפואי, ואינה מתאימה בהכרח לכל אדם — התאמה אישית נבדקת מראש",
